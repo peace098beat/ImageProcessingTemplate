@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 //http://www.fit.ac.jp/elec/lab/lulab/data/c_image_s.pdf
@@ -28,6 +22,8 @@ namespace ImageProcessingTemplate
             TargetBitmap = (Bitmap)Bitmap.FromFile(file_path);
             pictureBox1.Image = TargetBitmap;
             pictureBox1.Invalidate();
+
+
         }
 
         /****************************/
@@ -98,28 +94,40 @@ namespace ImageProcessingTemplate
             textBox_debug.Text += format.ToString() + Environment.NewLine;
             textBox_debug.Text += $"W:{TargetBitmap.Width}, H:{TargetBitmap.Height}" + Environment.NewLine;
 
-
             SwStart();
 
             // 画像処理
-            //FiImageProcess.GrayScale(ref TargetBitmap);
-
-            var hist = new ImageHistogram(ref TargetBitmap, 256);
+            var hist = new ImageHistogram(ref TargetBitmap);
 
             // 計測
             SwStop("hist");
 
+            float[] R_Norm = hist.R.GetNorm;
 
-            for (int i = 0; i < hist.BinLength; i++)
+            this.chartHistogramControl1.AddPoints("R", hist.R.GetNorm);
+            this.chartHistogramControl1.AddPoints("G", hist.G.GetNorm);
+            this.chartHistogramControl1.AddPoints("B", hist.B.GetNorm);
+            this.chartHistogramControl1.Refresh();
+
+            this.chartHistogramHSVControl1.AddPoints("H", hist.H.GetNorm);
+            this.chartHistogramHSVControl1.AddPoints("S", hist.S.GetNorm);
+            this.chartHistogramHSVControl1.AddPoints("V", hist.V.GetNorm);
+            this.chartHistogramHSVControl1.Refresh();
+
+
+
+            for (int i = 0; i < hist.N_BINS; i++)
             {
-                int ri = hist.R.values[i];
-                int gi = hist.G.values[i];
-                int bi = hist.B.values[i];
-                textBox_debug.Text += $"[{i}] {ri} {gi} {bi}" + Environment.NewLine;
-
+                float ri = hist.R.GetNorm[i];
+                float gi = hist.G.GetNorm[i];
+                float bi = hist.B.GetNorm[i];
+                float hi = hist.H.GetNorm[i];
+                float si = hist.S.GetNorm[i];
+                float vi = hist.V.GetNorm[i];
+                //textBox_debug.Text += $"[{i}] {ri.ToString("F2")} {gi.ToString("F2")} {bi.ToString("F2")}, {hi.ToString("F2")} {si.ToString("F2")} {vi.ToString("F2")}" + Environment.NewLine;
             }
 
-            pictureBox1.Invalidate();
+            //pictureBox1.Invalidate();
 
         }
 

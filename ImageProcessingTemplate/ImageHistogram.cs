@@ -10,18 +10,19 @@ namespace ImageProcessingTemplate
 {
     public class ImageHistogram
     {
-        public int BinLength;
+        public int N_BINS;
 
         public Histogram R;
         public Histogram G;
         public Histogram B;
+
         public Histogram H;
         public Histogram S;
         public Histogram V;
 
-        public ImageHistogram(ref Bitmap img, int bins = 128)
+        public ImageHistogram(ref Bitmap img)
         {
-            this.BinLength = bins;
+            this.N_BINS = 256;
 
             // ---------- 1ピクセルあたりのバイト数を取得する
             PixelFormat pixelFormat = img.PixelFormat;
@@ -47,12 +48,13 @@ namespace ImageProcessingTemplate
 
 
 
-            this.R = new Histogram(bins);
-            this.B = new Histogram(bins);
-            this.G = new Histogram(bins);
-            this.H = new Histogram(bins);
-            this.S = new Histogram(bins);
-            this.V = new Histogram(bins);
+            this.R = new Histogram(N_BINS);
+            this.B = new Histogram(N_BINS);
+            this.G = new Histogram(N_BINS);
+
+            this.H = new Histogram(N_BINS);
+            this.S = new Histogram(N_BINS);
+            this.V = new Histogram(N_BINS);
 
             unsafe
             {
@@ -72,10 +74,14 @@ namespace ImageProcessingTemplate
                         this.G.Add(G);
                         this.B.Add(B);
 
-                        //c = Color.FromArgb(R, G, B);
-                        //byte H = (byte)(255 * c.GetHue());
-                        //byte S = (byte)(255 * c.GetSaturation());
-                        //byte V = (byte)(255 * c.GetBrightness());
+                        Color c = Color.FromArgb(R, G, B);
+                        byte H = (byte)(255 * c.GetHue()/360.0);
+                        byte S = (byte)(255 * c.GetSaturation());
+                        byte V = (byte)(255 * c.GetBrightness());
+
+                        this.H.Add(H);
+                        this.S.Add(S);
+                        this.V.Add(V);
 
                     }
                 }
@@ -92,12 +98,14 @@ namespace ImageProcessingTemplate
     public class Histogram
     {
         public int[] values;
-        private int bin_size;
+        private int wbin;
+        private int nbin;
 
-        public Histogram(int bin)
+        public Histogram(int nbin)
         {
-            values = new int[bin];
-            bin_size = 256 / bin;
+            this.nbin = nbin;
+            values = new int[nbin];
+            wbin = 256 / nbin;
         }
 
         public void Add(byte value)
@@ -107,7 +115,7 @@ namespace ImageProcessingTemplate
                 throw new ArgumentException("valueは0-255にしてください");
             }
 
-            int index = value / bin_size;
+            int index = value / wbin;
 
             values[index]++;
         }
@@ -122,6 +130,19 @@ namespace ImageProcessingTemplate
                     sum += values[i];
                 }
                 return sum;
+            }
+        }
+        public float[] GetNorm
+        {
+            get
+            {
+                float[] norm = new float[nbin];
+                int N = this.TotalNumber;
+                for (int i = 0; i < norm.Length; i++)
+                {
+                    norm[i] = (float)values[i] / N;
+                }
+                return norm;
             }
         }
     }

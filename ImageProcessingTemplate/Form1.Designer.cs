@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -45,6 +46,8 @@
             this.comboBox_GradationType = new System.Windows.Forms.ComboBox();
             this.button_BmpSave = new System.Windows.Forms.Button();
             this.button_HSV = new System.Windows.Forms.Button();
+            this.chartHistogramControl1 = new ImageProcessingTemplate.ChartHistogramRGBControl();
+            this.chartHistogramHSVControl1 = new ImageProcessingTemplate.ChartHistogramHSVControl();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -234,11 +237,28 @@
             this.button_HSV.UseVisualStyleBackColor = true;
             this.button_HSV.Click += new System.EventHandler(this.button_HSV_Click);
             // 
+            // chartHistogramControl1
+            // 
+            this.chartHistogramControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(53)))), ((int)(((byte)(73)))));
+            this.chartHistogramControl1.Location = new System.Drawing.Point(516, 29);
+            this.chartHistogramControl1.Name = "chartHistogramControl1";
+            this.chartHistogramControl1.Size = new System.Drawing.Size(300, 150);
+            this.chartHistogramControl1.TabIndex = 18;
+            // 
+            // chartHistogramHSVControl1
+            // 
+            this.chartHistogramHSVControl1.Location = new System.Drawing.Point(516, 206);
+            this.chartHistogramHSVControl1.Name = "chartHistogramHSVControl1";
+            this.chartHistogramHSVControl1.Size = new System.Drawing.Size(300, 150);
+            this.chartHistogramHSVControl1.TabIndex = 19;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1030, 592);
+            this.Controls.Add(this.chartHistogramHSVControl1);
+            this.Controls.Add(this.chartHistogramControl1);
             this.Controls.Add(this.button_HSV);
             this.Controls.Add(this.button_BmpSave);
             this.Controls.Add(this.comboBox_GradationType);
@@ -287,6 +307,8 @@
         private System.Windows.Forms.ComboBox comboBox_GradationType;
         private System.Windows.Forms.Button button_BmpSave;
         private System.Windows.Forms.Button button_HSV;
+        private ChartHistogramRGBControl chartHistogramControl1;
+        private ChartHistogramHSVControl chartHistogramHSVControl1;
     }
 }
 

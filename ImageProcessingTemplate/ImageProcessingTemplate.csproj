@@ -46,6 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChartHistogramRGBControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ChartHistogramRGBControl.Designer.cs">
+      <DependentUpon>ChartHistogramRGBControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChartHistogramHSVControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ChartHistogramHSVControl.Designer.cs">
+      <DependentUpon>ChartHistogramHSVControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="FiImageProcess.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -53,10 +65,14 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImageColorProc.cs" />
     <Compile Include="ImageHistogram.cs" />
     <Compile Include="ImageSampleCreator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ChartHistogramRGBControl.resx">
+      <DependentUpon>ChartHistogramRGBControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

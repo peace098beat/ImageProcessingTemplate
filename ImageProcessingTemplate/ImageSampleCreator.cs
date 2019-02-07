@@ -123,7 +123,7 @@ namespace ImageProcessingTemplate
                     float u = (x / (float)(bmpData.Width - 1));
                     float w = (y / (float)(bmpData.Height - 1));
 
-                    Color c = HSVtoRGB(u, 1.0f, w);
+                    Color c = ImageColorProc.HSVtoRGB(u, 1.0f, w);
 
                     //青、緑、赤の色を変更する
                     pixels[pos + 0] = (byte)(c.B);
@@ -138,57 +138,6 @@ namespace ImageProcessingTemplate
             bmp.UnlockBits(bmpData);
         }
 
-        /// <summary>
-        /// HSVtoRGB
-        /// </summary>
-        /// <param name="h">0-360</param>
-        /// <param name="s">0-1</param>
-        /// <param name="v">0-1</param>
-        /// <returns></returns>
-        private static Color HSVtoRGB(float h, float s, float v)
-        {
-            // (float h, float s, float v)
-            float r = v;
-            float g = v;
-            float b = v;
-            if (s > 0.0f)
-            {
-                h *= 6.0f;
-                int i = (int)h;
-                float f = h - (float)i;
-                switch (i)
-                {
-                    default:
-                    case 0:
-                        g *= 1 - s * (1 - f);
-                        b *= 1 - s;
-                        break;
-                    case 1:
-                        r *= 1 - s * f;
-                        b *= 1 - s;
-                        break;
-                    case 2:
-                        r *= 1 - s;
-                        b *= 1 - s * (1 - f);
-                        break;
-                    case 3:
-                        r *= 1 - s;
-                        g *= 1 - s * f;
-                        break;
-                    case 4:
-                        r *= 1 - s * (1 - f);
-                        g *= 1 - s;
-                        break;
-                    case 5:
-                        g *= 1 - s;
-                        b *= 1 - s * f;
-                        break;
-                }
-            }
-            byte br = (byte)(255 * r);
-            byte bg = (byte)(255 * g);
-            byte bb = (byte)(255 * b);
-            return Color.FromArgb(br, bg, bb);
-        }
+    
     }
 }
