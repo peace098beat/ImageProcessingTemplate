@@ -69,7 +69,7 @@ namespace ImageProcessingTemplate
         /// <summary>
         /// 画像ファイルを開く
         /// </summary>
-        private void button_FileOpen_Click(object sender, EventArgs e)
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             if (ofd.ShowDialog() == DialogResult.OK)
@@ -82,55 +82,13 @@ namespace ImageProcessingTemplate
             }
         }
 
-        /// <summary>
-        /// 解析
-        /// </summary>
-        private void button1_Click(object sender, EventArgs e)
+    
+        private void button_Gray_Click(object sender, EventArgs e)
         {
             if (TargetBitmap == null) return;
-
-            var format = TargetBitmap.PixelFormat;
-            textBox_debug.Text = "";
-            textBox_debug.Text += format.ToString() + Environment.NewLine;
-            textBox_debug.Text += $"W:{TargetBitmap.Width}, H:{TargetBitmap.Height}" + Environment.NewLine;
-
-            SwStart();
-
-            // 画像処理
-            var hist = new ImageHistogram(ref TargetBitmap);
-
-            // 計測
-            SwStop("hist");
-
-            float[] R_Norm = hist.R.GetNorm;
-
-            this.chartHistogramControl1.AddPoints("R", hist.R.GetNorm);
-            this.chartHistogramControl1.AddPoints("G", hist.G.GetNorm);
-            this.chartHistogramControl1.AddPoints("B", hist.B.GetNorm);
-            this.chartHistogramControl1.Refresh();
-
-            this.chartHistogramHSVControl1.AddPoints("H", hist.H.GetNorm);
-            this.chartHistogramHSVControl1.AddPoints("S", hist.S.GetNorm);
-            this.chartHistogramHSVControl1.AddPoints("V", hist.V.GetNorm);
-            this.chartHistogramHSVControl1.Refresh();
-
-
-
-            for (int i = 0; i < hist.N_BINS; i++)
-            {
-                float ri = hist.R.GetNorm[i];
-                float gi = hist.G.GetNorm[i];
-                float bi = hist.B.GetNorm[i];
-                float hi = hist.H.GetNorm[i];
-                float si = hist.S.GetNorm[i];
-                float vi = hist.V.GetNorm[i];
-                //textBox_debug.Text += $"[{i}] {ri.ToString("F2")} {gi.ToString("F2")} {bi.ToString("F2")}, {hi.ToString("F2")} {si.ToString("F2")} {vi.ToString("F2")}" + Environment.NewLine;
-            }
-
-            //pictureBox1.Invalidate();
-
+            FiImageProcess.GrayScale(ref TargetBitmap);
+            pictureBox1.Invalidate();
         }
-
 
         /// <summary>
         /// グラデーション画像生成
@@ -153,9 +111,29 @@ namespace ImageProcessingTemplate
         }
 
         /// <summary>
+        /// HSV平面表示
+        /// </summary>
+        private void button_HSV_Click(object sender, EventArgs e)
+        {
+            // 色選択
+
+
+            SwStart();
+            // 画像処理
+
+            ImageSampleCreator.CreateHSV(out TargetBitmap);
+
+            SwStop("Dot");
+
+            // 再描画
+            pictureBox1.Invalidate();
+        }
+
+        /// <summary>
+        /// [Menu] File -> SAVE
         /// 名前を付けて画像を保存
         /// </summary>
-        private void button_BmpSave_Click(object sender, EventArgs e)
+        private void sAVEToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif";
@@ -182,26 +160,78 @@ namespace ImageProcessingTemplate
                         break;
                 }
             }
-
         }
 
         /// <summary>
-        /// HSV平面表示
+        /// 解析 -> ヒストグラム
         /// </summary>
-        private void button_HSV_Click(object sender, EventArgs e)
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_Histgram_Click(object sender, EventArgs e)
         {
-            // 色選択
+            if (TargetBitmap == null) return;
 
-
+            // 時間計測
             SwStart();
+
             // 画像処理
+            var hist = new ImageHistogram(ref TargetBitmap);
 
-            ImageSampleCreator.CreateHSV(out TargetBitmap);
+            // 時間計測
+            SwStop("hist");
 
-            SwStop("Dot");
+            this.chartHistogramControl1.AddPoints("R", hist.R.GetNorm);
+            this.chartHistogramControl1.AddPoints("G", hist.G.GetNorm);
+            this.chartHistogramControl1.AddPoints("B", hist.B.GetNorm);
+            this.chartHistogramControl1.Refresh();
 
-            // 再描画
-            pictureBox1.Invalidate();
+            this.chartHistogramHSVControl1.AddPoints("H", hist.H.GetNorm);
+            this.chartHistogramHSVControl1.AddPoints("S", hist.S.GetNorm);
+            this.chartHistogramHSVControl1.AddPoints("V", hist.V.GetNorm);
+            this.chartHistogramHSVControl1.Refresh();
+        }
+
+        /// <summary>
+        /// 解析 -> フラクタル
+        /// </summary>
+        private void button_Ana_Fractal_Click(object sender, EventArgs e)
+        {
+            if (TargetBitmap == null) return;
+
+            byte Threshhold = (byte)numericUpDown1.Value;
+
+            textBox_debug.Text = "";
+
+            textBox_debug.Text += $"{TargetBitmap.Width}x{TargetBitmap.Height}"+Environment.NewLine;
+
+            // 時間計測
+            SwStart();
+            this.chartFractalControl1.Reset();
+
+            // フラクタル処理
+            int Nf = 10; // 2-^8
+            for (int i = 1; i < Nf; i++)
+            {
+
+                // フラクタルの計算
+                uint kernel = (uint)Math.Pow(2, i);
+                double count = Fractal.PixelCounting.Count(kernel, Threshhold, in TargetBitmap);
+
+                // グラフに入れる
+                this.chartFractalControl1.AddPoint((int)kernel, count);
+
+                // デバッグログ
+                string msg = $"[{kernel.ToString("D3")}(2^{i})] {count}";
+                textBox_debug.Text += msg + Environment.NewLine;
+            }
+            SwStop("Fractal");
+
+            double D = this.chartFractalControl1.GetFractalNumber();
+            textBox_debug.Text += $"Fractal Number D: {D}";
+
+            this.chartFractalControl1.Refresh();
+
+
         }
     }
 

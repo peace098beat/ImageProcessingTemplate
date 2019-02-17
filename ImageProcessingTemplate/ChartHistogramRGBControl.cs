@@ -25,6 +25,9 @@ namespace ImageProcessingTemplate
         public ChartHistogramRGBControl()
         {
             InitializeComponent();
+
+
+
             this.BackColor = Color.FromArgb(37, 53, 73);
 
             // コンテキストメニューを生成します

@@ -110,24 +110,24 @@ namespace ImageProcessingTemplate
         {
             // ---------- 1ピクセルあたりのバイト数を取得する
             PixelFormat pixelFormat = img.PixelFormat;
-            
+
             // ---------- エラー処理
             int pixelSize = Image.GetPixelFormatSize(pixelFormat) / 8;
             if (pixelSize < 3 || 4 < pixelSize)
             {
                 throw new ArgumentException(
-                    "1ピクセルあたり24または32ビットの形式のイメージのみ有効です。","img");
+                    "1ピクセルあたり24または32ビットの形式のイメージのみ有効です。", "img");
             }
 
 
             // ---------- ロック
-            BitmapData bmpData = img.LockBits(new Rectangle(0,0, img.Width, img.Height), ImageLockMode.ReadWrite, pixelFormat);
+            BitmapData bmpData = img.LockBits(new Rectangle(0, 0, img.Width, img.Height), ImageLockMode.ReadWrite, pixelFormat);
 
             // ---------- エラー処理
             if (bmpData.Stride < 0)
             {
                 img.UnlockBits(bmpData);
-                throw new ArgumentException("ボトムアップ形式のイメージには対応していません。","img");
+                throw new ArgumentException("ボトムアップ形式のイメージには対応していません。", "img");
             }
 
 
@@ -140,25 +140,23 @@ namespace ImageProcessingTemplate
                     {
                         //ピクセルデータでのピクセル(x,y)の開始位置を計算する
                         int pos = y * bmpData.Stride + x * pixelSize;
-                        //青、緑、赤の色を変更する
-                        pixelPtr[pos] = (byte)(255 - pixelPtr[pos]);
-                        pixelPtr[pos + 1] = (byte)(255 - pixelPtr[pos + 1]);
-                        pixelPtr[pos + 2] = (byte)(255 - pixelPtr[pos + 2]);
+
 
                         byte R = pixelPtr[pos];
-                        byte G = pixelPtr[pos+1];
-                        byte B = pixelPtr[pos+2];
+                        byte G = pixelPtr[pos + 1];
+                        byte B = pixelPtr[pos + 2];
 
-                        byte gray = (byte)((0.3 * R + 0.59 * G + 0.11 * B) / 3); // 平均値
+                        //byte gray = (byte)((0.3 * R + 0.59 * G + 0.11 * B) / 3); // 平均値
+                        byte gray = (byte)((R + G + B) / 3); // 平均値
 
                         pixelPtr[pos] = gray;
-                        pixelPtr[pos+1] = gray;
-                        pixelPtr[pos+2] = gray;
+                        pixelPtr[pos + 1] = gray;
+                        pixelPtr[pos + 2] = gray;
 
                     }
                 }
             }
-          
+
 
             // ---------- ロックを解除する
             img.UnlockBits(bmpData);
@@ -191,7 +189,7 @@ namespace ImageProcessingTemplate
             }
 
             // 合計, 
-          
+
 
             unsafe
             {
@@ -207,7 +205,7 @@ namespace ImageProcessingTemplate
                         byte G = pixelPtr[pos + 1];
                         byte B = pixelPtr[pos + 2];
 
-                         //c = Color.FromArgb(R, G, B);
+                        //c = Color.FromArgb(R, G, B);
                         //byte H = (byte)(255 * c.GetHue());
                         //byte S = (byte)(255 * c.GetSaturation());
                         //byte V = (byte)(255 * c.GetBrightness());

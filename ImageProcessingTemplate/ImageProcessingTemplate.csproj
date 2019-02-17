@@ -22,6 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -46,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChartFractalControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ChartFractalControl.Designer.cs">
+      <DependentUpon>ChartFractalControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChartHistogramRGBControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -65,11 +73,16 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Fractal\BoxCounting.cs" />
+    <Compile Include="Fractal\PixelCounting.cs" />
     <Compile Include="ImageColorProc.cs" />
     <Compile Include="ImageHistogram.cs" />
     <Compile Include="ImageSampleCreator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ChartFractalControl.resx">
+      <DependentUpon>ChartFractalControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChartHistogramRGBControl.resx">
       <DependentUpon>ChartHistogramRGBControl.cs</DependentUpon>
     </EmbeddedResource>
