@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Diagnostics;
+using System.Drawing;
 namespace FractalTests
 {
     class Program
@@ -16,6 +17,7 @@ namespace FractalTests
         {
             //string path = @"img\GaussNoise50per_x1024.png";
             string path = @"img\white2.png";
+            //string path = @"img\black.png";
 
             // 画像をロード
             Bitmap OriginBitmap = FiFractal.Images.FromFile(path);
@@ -35,9 +37,15 @@ namespace FractalTests
             Bitmap BinalyBitmap = (Bitmap)GrayScaleBitmap.Clone();
             FiFractal.BitmapConverter.Binalize(ref BinalyBitmap, thr);
 
+            byte[,] b = FiFractal.BitmapConverter.BitmapToByte2D(in BinalyBitmap);
+
 
             // BoxCounting
-            FiFractal.BoxCounting boxcounting = new FiFractal.BoxCounting(BinalyBitmap, thr);
+            FiFractal.BoxCounting box = new FiFractal.BoxCounting(BinalyBitmap, thr);
+            double D = box.D;
+
+            Debug.WriteLine($"Fractal D={D}");
+            box.WriteCsv(System.IO.Path.GetFileNameWithoutExtension(path) + ".csv");
 
 
             // Save
@@ -58,6 +66,7 @@ namespace FractalTests
 
 
         }
+
 
     }
 }

@@ -53,6 +53,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="img\black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="img\flower.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
