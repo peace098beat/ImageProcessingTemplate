@@ -119,7 +119,6 @@ namespace ImageProcessingTemplate
                     "1ピクセルあたり24または32ビットの形式のイメージのみ有効です。", "img");
             }
 
-
             // ---------- ロック
             BitmapData bmpData = img.LockBits(new Rectangle(0, 0, img.Width, img.Height), ImageLockMode.ReadWrite, pixelFormat);
 

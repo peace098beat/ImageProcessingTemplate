@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
-//http://www.fit.ac.jp/elec/lab/lulab/data/c_image_s.pdf
+// http://www.fit.ac.jp/elec/lab/lulab/data/c_image_s.pdf
 
 
 namespace ImageProcessingTemplate
@@ -22,8 +22,6 @@ namespace ImageProcessingTemplate
             TargetBitmap = (Bitmap)Bitmap.FromFile(file_path);
             pictureBox1.Image = TargetBitmap;
             pictureBox1.Invalidate();
-
-
         }
 
         /****************************/

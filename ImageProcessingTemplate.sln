@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessingTemplate", "ImageProcessingTemplate\ImageProcessingTemplate.csproj", "{9AB0027F-F8E7-43FF-B386-7A71F7AA9E11}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FractalTests", "FractalTests\FractalTests.csproj", "{88B2D78C-E15F-4175-B057-84F2D05F4333}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiFractal", "FiFractal\FiFractal.csproj", "{6FD0FB4F-C9EB-481B-8809-CE5FF10B64F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{9AB0027F-F8E7-43FF-B386-7A71F7AA9E11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AB0027F-F8E7-43FF-B386-7A71F7AA9E11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AB0027F-F8E7-43FF-B386-7A71F7AA9E11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88B2D78C-E15F-4175-B057-84F2D05F4333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88B2D78C-E15F-4175-B057-84F2D05F4333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88B2D78C-E15F-4175-B057-84F2D05F4333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88B2D78C-E15F-4175-B057-84F2D05F4333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FD0FB4F-C9EB-481B-8809-CE5FF10B64F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FD0FB4F-C9EB-481B-8809-CE5FF10B64F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FD0FB4F-C9EB-481B-8809-CE5FF10B64F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FD0FB4F-C9EB-481B-8809-CE5FF10B64F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
