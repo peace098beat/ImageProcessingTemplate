@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FiFractal
 {
     public class BoxCounting
     {
-        public LeastMeanSquare LMS;
         public double D;
+        public LeastMeanSquare LMS;
 
         // カウント結果
         public double[] X { get; private set; }
@@ -162,8 +158,6 @@ namespace FiFractal
         /// <summary>
         /// CSVで吐き出しー
         /// </summary>
-        /// <param name="X"></param>
-        /// <param name="Y"></param>
         public void WriteCsv(string path)
         {
             if(System.IO.Path.GetExtension(path) != ".csv")
@@ -179,8 +173,14 @@ namespace FiFractal
                 // 出力用のファイルを開く
                 using (var sw = new System.IO.StreamWriter(path, append))
                 {
-                    sw.WriteLine("X,Y,LogX,LogY,Log2X,Log2Y,Log10X,Log10Y");
+                    sw.WriteLine("#Date, {0}", DateTime.Now);
+                    sw.WriteLine("#Fractal D, {0}", this.D);
+                    sw.WriteLine("#LMS.loss, {0}", this.LMS.loss);
+                    sw.WriteLine("#LMS.a, {0}", this.LMS.a);
+                    sw.WriteLine("#LMS.b, {0}", this.LMS.b);
+                    sw.WriteLine("");
 
+                    sw.WriteLine("X,Y,LogX,LogY,Log2X,Log2Y,Log10X,Log10Y");
 
                     for (int i = 0; i < X.Length; ++i)
                     {
@@ -193,6 +193,15 @@ namespace FiFractal
                 // ファイルを開くのに失敗したときエラーメッセージを表示
                 System.Console.WriteLine(e.Message);
             }
+        }
+
+        /// <summary>
+        /// 書式
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return String.Format("[BoxCount] D:{0:F3}, LMS.a:{1:F2}, .b:{2:F2}, .loss:{3}", D, LMS.a, LMS.b, LMS.loss);
         }
 
     }

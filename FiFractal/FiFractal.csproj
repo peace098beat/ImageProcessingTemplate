@@ -51,11 +51,10 @@
     <Compile Include="BitmapConverter\ToneInverse.cs" />
     <Compile Include="BoxCounting.cs" />
     <Compile Include="Images\Images.cs" />
+    <Compile Include="Imgproc\Histgram.cs" />
     <Compile Include="LeastMeanSquare.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BitmapCre\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

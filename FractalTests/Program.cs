@@ -22,7 +22,6 @@ namespace FractalTests
             // 画像をロード
             Bitmap OriginBitmap = FiFractal.Images.FromFile(path);
 
-
             // グレースケール化
             Bitmap GrayScaleBitmap = (Bitmap)OriginBitmap.Clone();
             FiFractal.BitmapConverter.GrayScale(ref GrayScaleBitmap);
@@ -31,6 +30,11 @@ namespace FractalTests
             byte[,] bGrayArray = FiFractal.BitmapConverter.BitmapToByte2D(in GrayScaleBitmap);
             float[,] fGrayArray = FiFractal.BitmapConverter.BitmapToFloat2D(in GrayScaleBitmap);
 
+
+            // ヒストグラム
+            var hist = new FiFractal.Imgproc.Histgram(bGrayArray);
+            hist.WriteCsv("histogram.csv");
+            Debug.WriteLine(hist);
 
             // 二値化
             byte thr = 32;
@@ -42,13 +46,11 @@ namespace FractalTests
 
             // BoxCounting
             FiFractal.BoxCounting box = new FiFractal.BoxCounting(BinalyBitmap, thr);
-            double D = box.D;
-
-            Debug.WriteLine($"Fractal D={D}");
+            Debug.WriteLine(box);
             box.WriteCsv(System.IO.Path.GetFileNameWithoutExtension(path) + ".csv");
 
 
-            // Save
+            // Save Image
             FiFractal.Images.Save(OriginBitmap, "OriginBitmap.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
             FiFractal.Images.Save(GrayScaleBitmap, "GrayScaleBitmap.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
             FiFractal.Images.Save(BinalyBitmap, "BinalyBitmap.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
