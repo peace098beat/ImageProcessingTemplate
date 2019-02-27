@@ -39,10 +39,6 @@ namespace FiFractal
         /// <summary>
         /// 拡大縮小. アスペクト比は維持しない.
         /// </summary>
-        /// <param name="OriginBitmap"></param>
-        /// <param name="Width"></param>
-        /// <param name="Height"></param>
-        /// <returns></returns>
         static public Bitmap Scale(Bitmap OriginBitmap, int Width, int Height)
         {
             // 変換後のbitmap
@@ -61,6 +57,48 @@ namespace FiFractal
             }
 
             return ScaledBitmap;
+        }
+
+
+        /// <summary>
+        /// 正方形でクリップ
+        /// </summary>
+        static public Bitmap SqureClip(in Bitmap OriginBitmap)
+        {
+
+            // Clipされた画像のサイズ
+            Rectangle ClipRect;
+
+            if (OriginBitmap.Width < OriginBitmap.Height)
+            {
+                // 縦長
+                // ---
+                // | |
+                // --- <- Width
+                // | |
+                // | |
+                // | |
+                // ---
+                ClipRect = new Rectangle(0, 0, OriginBitmap.Width, OriginBitmap.Width);
+
+            }
+            else
+            {
+                // 横長
+                //  ---------------
+                // |   |          |
+                //  ---------------
+                //     ^-Height
+                ClipRect = new Rectangle(0, 0, OriginBitmap.Height, OriginBitmap.Height);
+            }
+
+            // クリップ領域をクローン!!
+            Bitmap ClipedBitmap = OriginBitmap.Clone(ClipRect, OriginBitmap.PixelFormat);
+
+
+            // もしスケーリングするなら..
+            return ClipedBitmap;
+
         }
     }
 }

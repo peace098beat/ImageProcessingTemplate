@@ -92,4 +92,5 @@ BoxCounting()
 PixcepCounting()
 
 
-
+# GPUからCPU側へメモリを転送する方法
+glReadPixels() を使うか Pixel Buffer Object

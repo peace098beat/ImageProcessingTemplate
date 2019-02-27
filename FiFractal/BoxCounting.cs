@@ -8,6 +8,7 @@ namespace FiFractal
     {
         public double D;
         public LeastMeanSquare LMS;
+        public Stopwatch sw;
 
         // カウント結果
         public double[] X { get; private set; }
@@ -21,6 +22,8 @@ namespace FiFractal
 
         public BoxCounting(Bitmap image, byte Thr)
         {
+            sw = Stopwatch.StartNew();
+
             // 二値化
             Bitmap BinalyBitmap = (Bitmap)image.Clone();
             //FiFractal.BitmapConverter.ToneInverse(ref BinalyBitmap);
@@ -43,6 +46,9 @@ namespace FiFractal
 
             // フラクタル次元Dを算出
             this.D = (-1) * LMS.a;
+
+            // 時間計測完了
+            sw.Stop();
 
         }
 
@@ -201,7 +207,7 @@ namespace FiFractal
         /// <returns></returns>
         public override string ToString()
         {
-            return String.Format("[BoxCount] D:{0:F3}, LMS.a:{1:F2}, .b:{2:F2}, .loss:{3}", D, LMS.a, LMS.b, LMS.loss);
+            return String.Format("[BoxCount] D:{0:F3}, LMS.a:{1:F2}, .b:{2:F2}, .loss:{3}, time:{4}", D, LMS.a, LMS.b, LMS.loss, sw.Elapsed);
         }
 
     }

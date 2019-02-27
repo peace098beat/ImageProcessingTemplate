@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace FiFractal.Imgproc
 {
     public class Histgram
     {
+        public Stopwatch sw;
+
         public int[] Bins;
         public int[] Frequency;
         public double[] Density;
@@ -21,6 +24,7 @@ namespace FiFractal.Imgproc
         /// <param name="bins">1～256</param>
         public Histgram(in byte[,] image)
         {
+            sw = Stopwatch.StartNew();
 
             // 初期化
             this.Bins = new int[256];
@@ -85,7 +89,8 @@ namespace FiFractal.Imgproc
             }
 
 
-
+            // 時間計測完了
+            sw.Stop();
         }
 
         /// <summary>
@@ -136,7 +141,7 @@ namespace FiFractal.Imgproc
         /// <returns></returns>
         public override string ToString()
         {
-            return String.Format("[Histgram] Mean:{0:F2}, Var:{1:F2}, Std:{2:F2}, Sum:{3}, TotalCount:{4}", Mean, Var, Std, Sum, TotalCount);
+            return String.Format("[Histgram] Mean:{0:F2}, Var:{1:F2}, Std:{2:F2}, Sum:{3}, TotalCount:{4}, time:{5}", Mean, Var, Std, Sum, TotalCount, sw.Elapsed);
         }
 
     }

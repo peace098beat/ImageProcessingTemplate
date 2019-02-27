@@ -16,15 +16,24 @@ namespace FractalTests
         static void BoxCountTest()
         {
             //string path = @"img\GaussNoise50per_x1024.png";
-            string path = @"img\white2.png";
+            //string path = @"img\white2.png";
             //string path = @"img\black.png";
+            //string path = @"img\flower.jpg";
+            string path = @"img\kiku.jpg";
 
             // 画像をロード
-            Bitmap OriginBitmap = FiFractal.Images.FromFile(path);
+            Bitmap RawBitmap = FiFractal.Images.FromFile(path);
+
+            // 正方形にクリップ
+            Bitmap SqureBitmap = FiFractal.Images.SqureClip(RawBitmap);
+
+            // スケール
+            Bitmap OriginBitmap = FiFractal.Images.Scale(SqureBitmap, 1024*4, 1024 * 4);
 
             // グレースケール化
             Bitmap GrayScaleBitmap = (Bitmap)OriginBitmap.Clone();
             FiFractal.BitmapConverter.GrayScale(ref GrayScaleBitmap);
+
 
             // byte配列に変形
             byte[,] bGrayArray = FiFractal.BitmapConverter.BitmapToByte2D(in GrayScaleBitmap);
@@ -40,6 +49,7 @@ namespace FractalTests
             byte thr = 32;
             Bitmap BinalyBitmap = (Bitmap)GrayScaleBitmap.Clone();
             FiFractal.BitmapConverter.Binalize(ref BinalyBitmap, thr);
+
 
             byte[,] b = FiFractal.BitmapConverter.BitmapToByte2D(in BinalyBitmap);
 

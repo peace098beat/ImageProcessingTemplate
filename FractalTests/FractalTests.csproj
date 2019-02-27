@@ -63,6 +63,9 @@
     <Content Include="img\GaussNoise50per_x1024.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="img\kiku.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="img\white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
