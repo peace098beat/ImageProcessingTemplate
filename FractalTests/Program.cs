@@ -17,9 +17,10 @@ namespace FractalTests
         {
             //string path = @"img\GaussNoise50per_x1024.png";
             //string path = @"img\white2.png";
-            //string path = @"img\black.png";
+            string path = @"img\black.png";
             //string path = @"img\flower.jpg";
-            string path = @"img\kiku.jpg";
+            //string path = @"img\kiku.jpg";
+            //string path = @"img\line.png";
 
             // 画像をロード
             Bitmap RawBitmap = FiFractal.Images.FromFile(path);
@@ -28,7 +29,7 @@ namespace FractalTests
             Bitmap SqureBitmap = FiFractal.Images.SqureClip(RawBitmap);
 
             // スケール
-            Bitmap OriginBitmap = FiFractal.Images.Scale(SqureBitmap, 1024*4, 1024 * 4);
+            Bitmap OriginBitmap = FiFractal.Images.Scale(SqureBitmap, 1024 * 1, 1024 * 1);
 
             // グレースケール化
             Bitmap GrayScaleBitmap = (Bitmap)OriginBitmap.Clone();
@@ -57,7 +58,12 @@ namespace FractalTests
             // BoxCounting
             FiFractal.BoxCounting box = new FiFractal.BoxCounting(BinalyBitmap, thr);
             Debug.WriteLine(box);
-            box.WriteCsv(System.IO.Path.GetFileNameWithoutExtension(path) + ".csv");
+            box.WriteCsv(System.IO.Path.GetFileNameWithoutExtension(path) + "-BoxCount.csv");
+
+            // Pixel  Counting
+            FiFractal.PixelCounting pxc = new FiFractal.PixelCounting(GrayScaleBitmap);
+            Debug.WriteLine(pxc);
+            pxc.WriteCsv(System.IO.Path.GetFileNameWithoutExtension(path) + "-Pixelcount.csv");
 
 
             // Save Image

@@ -66,6 +66,9 @@
     <Content Include="img\kiku.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="img\line.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="img\white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

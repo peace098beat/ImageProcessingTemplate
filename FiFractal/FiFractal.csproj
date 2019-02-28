@@ -53,6 +53,7 @@
     <Compile Include="Images\Images.cs" />
     <Compile Include="Imgproc\Histgram.cs" />
     <Compile Include="LeastMeanSquare.cs" />
+    <Compile Include="PixelCounting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
