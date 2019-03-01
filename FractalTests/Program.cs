@@ -15,9 +15,9 @@ namespace FractalTests
         // ボックスカウントする
         static void BoxCountTest()
         {
-            //string path = @"img\GaussNoise50per_x1024.png";
+            string path = @"img\GaussNoise50per_x1024.png";
             //string path = @"img\white2.png";
-            string path = @"img\black.png";
+            //string path = @"img\black.png";
             //string path = @"img\flower.jpg";
             //string path = @"img\kiku.jpg";
             //string path = @"img\line.png";
@@ -50,9 +50,6 @@ namespace FractalTests
             byte thr = 32;
             Bitmap BinalyBitmap = (Bitmap)GrayScaleBitmap.Clone();
             FiFractal.BitmapConverter.Binalize(ref BinalyBitmap, thr);
-
-
-            byte[,] b = FiFractal.BitmapConverter.BitmapToByte2D(in BinalyBitmap);
 
 
             // BoxCounting

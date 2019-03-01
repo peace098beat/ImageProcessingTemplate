@@ -23,6 +23,7 @@ namespace FiFractal
 
         /// <summary>
         /// コンストラクタ
+        /// (注意) カウントする閾値は範囲を決めたほうがいい。直線になるとは限らない.
         /// </summary>
         /// <param name="GrayScale">グレースケール化したBitmap</param>
         public PixelCounting(Bitmap GrayScale)
@@ -52,7 +53,6 @@ namespace FiFractal
         /// <summary>
         /// カウントします　
         /// </summary>
-        /// <param name="image"></param>
         private void PixelCount(byte[,] image)
         {
             // 2^ 2, 3, 4, 5, 6, 7
