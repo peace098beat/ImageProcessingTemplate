@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ImageProcessingTemplate.Properties
+namespace FiFractalFormControl.Properties
 {
 
 

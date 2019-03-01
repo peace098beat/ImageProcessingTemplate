@@ -1,4 +1,4 @@
-﻿namespace ImageProcessingTemplate
+﻿namespace FiFractalFormControl
 {
     partial class Form1
     {
@@ -45,10 +45,10 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button_Histgram = new System.Windows.Forms.Button();
-            this.chartHistogramHSVControl1 = new ImageProcessingTemplate.ChartHistogramHSVControl();
-            this.chartHistogramControl1 = new ImageProcessingTemplate.ChartHistogramRGBControl();
+            this.chartHistogramHSVControl1 = new FiFractalFormControl.ChartHistogramHSVControl();
+            this.chartHistogramControl1 = new FiFractalFormControl.ChartHistogramRGBControl();
             this.button_Ana_Fractal = new System.Windows.Forms.Button();
-            this.chartFractalControl1 = new ImageProcessingTemplate.ChartFractalControl();
+            this.chartFractalControl1 = new FiFractalFormControl.ChartFractalControl();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();

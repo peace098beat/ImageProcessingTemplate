@@ -6,7 +6,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ImageProcessingTemplate
+namespace FiFractalFormControl
 {
     public partial class ChartHistogramRGBControl : UserControl
     {

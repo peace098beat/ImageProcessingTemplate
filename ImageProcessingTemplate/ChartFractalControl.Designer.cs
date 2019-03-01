@@ -1,4 +1,4 @@
-﻿namespace ImageProcessingTemplate
+﻿namespace FiFractalFormControl
 {
     partial class ChartFractalControl
     {

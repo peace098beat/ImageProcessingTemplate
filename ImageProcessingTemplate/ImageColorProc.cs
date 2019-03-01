@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImageProcessingTemplate
+namespace FiFractalFormControl
 {
     public static class ImageColorProc
     {

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 // http://www.fit.ac.jp/elec/lab/lulab/data/c_image_s.pdf
 
 
-namespace ImageProcessingTemplate
+namespace FiFractalFormControl
 {
     public partial class Form1 : Form
     {

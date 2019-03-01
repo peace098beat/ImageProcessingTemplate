@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ImageProcessingTemplate
+namespace FiFractalFormControl
 {
     public partial class ChartHistogramHSVControl : ChartHistogramRGBControl
     {

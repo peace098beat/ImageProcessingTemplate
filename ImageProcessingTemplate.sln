@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FractalTests", "FractalTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiFractal", "FiFractal\FiFractal.csproj", "{6FD0FB4F-C9EB-481B-8809-CE5FF10B64F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiFractalFormControl", "FiFractalFormControl\FiFractalFormControl.csproj", "{29269E16-1760-408F-887D-545419545BBD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{6FD0FB4F-C9EB-481B-8809-CE5FF10B64F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FD0FB4F-C9EB-481B-8809-CE5FF10B64F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FD0FB4F-C9EB-481B-8809-CE5FF10B64F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29269E16-1760-408F-887D-545419545BBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29269E16-1760-408F-887D-545419545BBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29269E16-1760-408F-887D-545419545BBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29269E16-1760-408F-887D-545419545BBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

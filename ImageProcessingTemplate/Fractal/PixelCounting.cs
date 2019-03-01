@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace ImageProcessingTemplate.Fractal
+namespace FiFractalFormControl.Fractal
 {
     public class PixelCounting
     {
